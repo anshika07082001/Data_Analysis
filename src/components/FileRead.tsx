@@ -52,9 +52,9 @@ const FileRead = () => {
   return (
     <div>
         <h2>Select File</h2>
-        <form onSubmit={(e)=>fileHandler(e)} >
-            <input type='file' accept='.csv' ref={fileRef} />
-            <button type='submit'>Submit</button>
+        <form onSubmit={(e)=>fileHandler(e)} className='p-3 m-auto col-6 border-primary border-2 border rounded' >
+            <input type='file' accept='.csv' ref={fileRef}/>
+            <button type='submit' className='btn btn-primary p-2 ps-3 pe-3 fs-6 fw-bold'>Submit</button>
         </form>
         {/* <>{console.log(dataArr)}</> */}
         {dataArr!==undefined?<IdComp dataArr={dataArr}/>:<></>}

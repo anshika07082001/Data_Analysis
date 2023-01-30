@@ -12,7 +12,7 @@ const IdComp = (props:idProps) => {
 
     useEffect(()=>{
         var idObj:any=[]
-        props.dataArr.slice(0,200).map((item:any)=>{
+        props.dataArr.slice(1,200).map((item:any)=>{
            
             if(!idObj.includes(item.CustomerID)){
                 idObj.push(item.CustomerID)
@@ -23,7 +23,7 @@ const IdComp = (props:idProps) => {
 
     const selectHandler=(e:React.ChangeEvent<HTMLSelectElement>)=>{
         selArr=[]
-        props.dataArr.slice(0,200).map((item:any)=>{
+        props.dataArr.slice(1,200).map((item:any)=>{
             if(item.CustomerID==e.currentTarget.value){
                 selArr.push(item)
             }
@@ -35,7 +35,7 @@ const IdComp = (props:idProps) => {
     <div>
         <h3>Invoice generation</h3>
         {props.dataArr!==undefined?
-        <select onChange={(e)=>selectHandler(e)} className='mt-3'>
+        <select onChange={(e)=>selectHandler(e)} className='mt-3 p-2 fs-6 fw-bold bg-primary text-white col-4 border-primary border-3 rounded'>
             <option>Select</option>
             {idObj.map((item:any)=>{
                 return <option>{item}</option>
@@ -43,10 +43,18 @@ const IdComp = (props:idProps) => {
         </select> 
         :<></>}
         {selArr.length>0?
-        <table className='m-auto mt-4'> 
-            <tr><th>CustomerID</th><th>Country</th><th>InvoiceDate</th><th>Quantity</th><th>UnitPrice</th></tr>
+        <table className='m-auto mt-4 border-2 border-primary p-2 col-8'> 
+            <tr className='fs-5'><th className='border border-primary border-2 p-2 bg-primary text-white'>CustomerID</th><th className=' bg-primary text-white border border-primary border-2 p-2'>Country</th><th className='bg-primary text-white border border-primary border-2 p-2'>InvoiceDate</th><th className='bg-primary text-white border border-primary border-2 p-2'>Quantity</th><th className='bg-primary text-white border border-primary border-2 p-2'>UnitPrice</th></tr>
             {selArr.map((item)=>{
-               return <tr><td>{item.CustomerID}</td><td>{item.Country}</td><td>{item.InvoiceDate}</td><td>{item.Quantity}</td><td>{item.UnitPrice}</td></tr>
+               return (
+               <tr className='fw-bold'>
+                <td className='border border-primary border-2 p-2'>{item.CustomerID}</td>
+                <td className='border border-primary border-2 p-2'>{item.Country}</td>
+                <td className='border border-primary border-2 p-2'>{item.InvoiceDate}</td>
+                <td className='border border-primary border-2 p-2'>{item.Quantity}</td>
+                <td className='border border-primary border-2 p-2'>{item.UnitPrice}</td>
+                </tr>
+               )
             })}
         </table> 
         :<></>}

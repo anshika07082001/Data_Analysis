@@ -4,10 +4,10 @@ import FileRead from './components/FileRead';
 
 function App() {
   return (
-    <div className='text-center mt-3'>
+    <div className='text-center bg-primary-subtle'>
       <FileRead/>
     </div>
-  );
+  )
 }
 
 export default App;
