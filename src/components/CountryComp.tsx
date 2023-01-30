@@ -15,9 +15,12 @@ const CountryComp = (props:countryProps) => {
     useEffect(()=>{
         var countryObj:any=[]
         props.dataArr.map((item:any)=>{
-           
-            if(!countryObj.includes(item.Country)){
-                countryObj.push(item.Country)
+            if(item.Country!=="" && item.InvoiceNo!=='' && item.Description!=='' && item.CustomerID!=='' && item.InvoiceDate!=='' && item.Quantity!=='' && item.StockCode!=='' && item.UnitPrice!==''){
+                if(item.Country.match(/\b([A-ZÀ-ÿ][-,a-z. ']+[ ]*)+/)){
+                    if(!countryObj.includes(item.Country)){
+                        countryObj.push(item.Country)
+                    }
+                }
             }
         })
         setcountryObj(countryObj)

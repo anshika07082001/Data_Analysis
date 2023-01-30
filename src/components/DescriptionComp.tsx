@@ -37,8 +37,6 @@ const DescriptionComp = (props:desProps) => {
     }
     // function calculates the total quantity and no. of times quantity is ordered
     const calculateQuant=()=>{
-        console.log(DesArr.length)
-        setQuantity(0)
         setLen(DesArr.length)
         DesArr.map((item)=>{
             quantity += Number(item.Quantity)
@@ -58,7 +56,7 @@ const DescriptionComp = (props:desProps) => {
         </select>
         :<></>}
         {/* renders the total quantity */}
-        {quantity!=0 && quantity==0?<h5>Total Quantity: {quantity}</h5>:<></>}
+        {quantity!=0 ?<h5>Total Quantity: {quantity}</h5>:<></>}
         {len!=0?<h5>{len} no. of times item is Ordered</h5>:<></>}
     </div>
   )

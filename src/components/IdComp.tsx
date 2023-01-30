@@ -14,9 +14,12 @@ const IdComp = (props:idProps) => {
     useEffect(()=>{
         var idObj:any=[]
         props.dataArr.map((item:any)=>{
-           
-            if(!idObj.includes(item.CustomerID)){
-                idObj.push(item.CustomerID)
+            if(item.CustomerID!=='' && item.Country!=='' && item.Description!=='' && item.InvoiceDate!=='' && item.InvoiceNo!=='' && item.Quantity!=='' && item.StockCode!=='' && item.UnitPrice!==''){
+                if(parseInt(item.CustomerID).toString().match(/^[0-9]\d{4}$/)){
+                    if(!idObj.includes(item.CustomerID )){
+                        idObj.push(item.CustomerID)
+                    }
+                }
             }
         })
         setIdObj(idObj)
