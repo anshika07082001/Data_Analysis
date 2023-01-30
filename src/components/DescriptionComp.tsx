@@ -28,6 +28,7 @@ const DescriptionComp = (props:desProps) => {
     const selectHandler=(e:React.ChangeEvent<HTMLSelectElement>)=>{
         DesArr=[]
         props.dataArr.map((item:any)=>{
+            if(item.Description!=="")
             if(item.Description==e.currentTarget.value){
                 DesArr.push(item)
             }
@@ -36,12 +37,20 @@ const DescriptionComp = (props:desProps) => {
         calculateQuant()
     }
     // function calculates the total quantity and no. of times quantity is ordered
-    const calculateQuant=()=>{
-        setLen(DesArr.length)
-        DesArr.map((item)=>{
-            quantity += Number(item.Quantity)
-        })
-        setQuantity(quantity)
+    const calculateQuant=()=>{        
+        if(DesArr.length==0)
+        {
+            setQuantity(1)
+            setLen(1)
+        }
+        else{
+            DesArr.map((item)=>{
+                if(item.Quantity!=='')
+                quantity += Number(item.Quantity)
+            })
+            setQuantity(quantity)
+            setLen(DesArr.length)
+        }
     }
     
   return (
