@@ -58,7 +58,7 @@ const IdComp = (props:idProps) => {
                 <td className='border border-primary border-2 p-2'>{item.Country}</td>
                 <td className='border border-primary border-2 p-2'>{item.InvoiceDate}</td>
                 <td className='border border-primary border-2 p-2'>{item.Quantity}</td>
-                <td className='border border-primary border-2 p-2'>{item.UnitPrice}</td>
+                <td className='border border-primary border-2 p-2'>${item.UnitPrice}</td>
                 </tr>
                )
             })}
