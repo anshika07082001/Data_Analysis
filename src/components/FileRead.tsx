@@ -12,10 +12,12 @@ const FileRead = () => {
     const reader = new FileReader();
     var [str,setStr]=useState<React.SetStateAction<undefined|ArrayBuffer|null|string>>()
     var [dataArr,setDataArr]=useState<React.SetStateAction<obj>|undefined|{}[]>()
+    var [loader,setLoader]=useState(false)
 
     // Function reads the data of a csv file
     const fileHandler =(e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
+        setLoader(true)
         if(fileRef.current!==null){
             if(fileRef.current.value!==''){
                 if(fileRef.current?.files!==null){
@@ -53,13 +55,17 @@ const FileRead = () => {
   return (
     <div>
         <h2>Select File</h2>
-        <form onSubmit={(e)=>fileHandler(e)} className='p-3 m-auto col-6 border-primary border-2 border rounded' >
+        <form onSubmit={(e)=>fileHandler(e)} className='p-3 m-auto' >
             <input type='file' accept='.csv' ref={fileRef}/>
             <button type='submit' className='btn btn-primary p-2 ps-3 pe-3 fs-6 fw-bold'>Submit</button>
         </form>
         {dataArr!==undefined?<IdComp dataArr={dataArr}/>:<></>}
         {dataArr!==undefined?<DescriptionComp dataArr={dataArr}/>:<></>}
         {dataArr!==undefined?<CountryComp dataArr={dataArr}/>:<></>}
+        <>{console.log(dataArr,loader)}</>
+        {loader && dataArr==undefined?
+        <img src='https://media3.giphy.com/media/3oEjI6SIIHBdRxXI40/200w.gif?cid=6c09b9523qh1sbzvsyfths04gpt6v2vnoetq3o2isani5a3o&rid=200w.gif&ct=g' alt=''/>
+        :<></>}
     </div>
   )
 }

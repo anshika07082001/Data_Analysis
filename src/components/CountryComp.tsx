@@ -14,7 +14,7 @@ const CountryComp = (props:countryProps) => {
     // function checks for repeated countries in a select box
     useEffect(()=>{
         var countryObj:any=[]
-        props.dataArr.slice(1,50).map((item:any)=>{
+        props.dataArr.map((item:any)=>{
            
             if(!countryObj.includes(item.Country)){
                 countryObj.push(item.Country)

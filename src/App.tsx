@@ -4,7 +4,7 @@ import FileRead from './components/FileRead';
 
 function App() {
   return (
-    <div className='text-center bg-primary-subtle'>
+    <div className='text-center'>
       <FileRead/>
     </div>
   )

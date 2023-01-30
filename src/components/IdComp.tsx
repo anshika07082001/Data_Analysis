@@ -13,7 +13,7 @@ const IdComp = (props:idProps) => {
     //  function checks for repeated description in a select box
     useEffect(()=>{
         var idObj:any=[]
-        props.dataArr.slice(1,200).map((item:any)=>{
+        props.dataArr.map((item:any)=>{
            
             if(!idObj.includes(item.CustomerID)){
                 idObj.push(item.CustomerID)
@@ -25,7 +25,7 @@ const IdComp = (props:idProps) => {
     // function renders the Id data in selectbox
     const selectHandler=(e:React.ChangeEvent<HTMLSelectElement>)=>{
         selArr=[]
-        props.dataArr.slice(1,200).map((item:any)=>{
+        props.dataArr.map((item:any)=>{
             if(item.CustomerID==e.currentTarget.value){
                 selArr.push(item)
             }
