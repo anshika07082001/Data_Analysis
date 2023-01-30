@@ -8,40 +8,29 @@ type obj = {
 }
 
 const FileRead = () => {
-    var fileRef = useRef<HTMLInputElement>(null)
-    const reader = new FileReader();
     var [str,setStr]=useState<React.SetStateAction<undefined|ArrayBuffer|null|string>>()
     var [dataArr,setDataArr]=useState<React.SetStateAction<obj>|undefined|{}[]>()
+    var [loader,setLoader]=useState(false)
 
-    // Function reads the data of a csv file
-    const fileHandler =(e:React.FormEvent<HTMLFormElement>)=>{
-        e.preventDefault();
-        if(fileRef.current!==null){
-            if(fileRef.current.value!==''){
-                if(fileRef.current?.files!==null){
-                    reader.readAsText(fileRef.current.files[0])
-                    reader.onload=function(e){
-                        setStr( e.target?.result)
-                    }
-                }
-            }
-            else{
-                alert('select Data')
-            }
-        }
-       
-        e.currentTarget.reset()
-    }
-    // function converts the text of a file into object array
+    // Function Fetches the data from csv file
     useEffect(()=>{
-        
+        setLoader(true)
+        fetch('./online_retail.csv')
+        .then(res=>res.text())
+        .then(resText=>{
+            setStr(resText)
+        })
+        convertToReadable()
+    },[str])
+
+    // Function converts the text data into object Array
+    const convertToReadable=()=>{
         if(typeof(str)=='string'){  
             var headings = str.slice(0,str.indexOf('\r\n')).split(',')
             var rowsData  = str.slice(str.indexOf('\r\n')+1).split('\r\n')
             let arr=rowsData.map((item)=>{
                 return item.split(',')
             })
-
             let objArr:{}[]=arr.map(ele=>{
                 let obj={};
                 ele.forEach((innerEle,i)=>{
@@ -50,20 +39,21 @@ const FileRead = () => {
                 return obj;
             }) 
             setDataArr(objArr)
+            setLoader(false)
         }
-    },[str])
+    }
 
   return (
     <div>
-        <h2>Select File</h2>
-        <form onSubmit={(e)=>fileHandler(e)} className='p-3 m-auto' >
-            <input type='file' accept='.csv' ref={fileRef}/>
-            <button type='submit' className='btn btn-primary p-2 ps-3 pe-3 fs-6 fw-bold'>Submit</button>
-        </form>
         {dataArr!==undefined?<IdComp dataArr={dataArr}/>:<></>}
         {dataArr!==undefined?<DescriptionComp dataArr={dataArr}/>:<></>}
         {dataArr!==undefined?<CountryComp dataArr={dataArr}/>:<></>}
-       
+        {/* renders the loader during fetching of data */}
+        {loader?
+        <>
+        <h2>Loading Data</h2>
+        <img style={{height:'100px',width:'100px'}} src='https://media.tenor.com/1s1_eaP6BvgAAAAC/rainbow-spinner-loading.gif' alt=''/>
+        </>:<></>}
     </div>
   )
 }
