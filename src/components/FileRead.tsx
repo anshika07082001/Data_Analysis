@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import CountryComp from './CountryComp'
 import DescriptionComp from './DescriptionComp'
 import IdComp from './IdComp'
+
 type obj = {
     Country:string,CustomerID:string,Description:string,InvoiceDate:string,InvoiceNo:string,Quantity:string,StockCode:string,UnitPrice:string
 }
@@ -12,6 +13,7 @@ const FileRead = () => {
     var [str,setStr]=useState<React.SetStateAction<undefined|ArrayBuffer|null|string>>()
     var [dataArr,setDataArr]=useState<React.SetStateAction<obj>|undefined|{}[]>()
 
+    // Function reads the data of a csv file
     const fileHandler =(e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
         if(fileRef.current!==null){
@@ -29,7 +31,7 @@ const FileRead = () => {
         }
         e.currentTarget.reset()
     }
-
+    // function converts the text of a file into object array
     useEffect(()=>{
         if(typeof(str)=='string'){  
             var headings = str.slice(0,str.indexOf('\r\n')).split(',')
@@ -37,7 +39,6 @@ const FileRead = () => {
             let arr=rowsData.map((item)=>{
                 return item.split(',')
             })
-            // let objArr:obj={Country:'',InvoiceDate:'',Description:'',CustomerID:'',InvoiceNo:'',Quantity:'',StockCode:'',UnitPrice:''}
             let objArr:{}[]=arr.map(ele=>{
                 let obj={};
                 ele.forEach((innerEle,i)=>{
@@ -56,7 +57,6 @@ const FileRead = () => {
             <input type='file' accept='.csv' ref={fileRef}/>
             <button type='submit' className='btn btn-primary p-2 ps-3 pe-3 fs-6 fw-bold'>Submit</button>
         </form>
-        {/* <>{console.log(dataArr)}</> */}
         {dataArr!==undefined?<IdComp dataArr={dataArr}/>:<></>}
         {dataArr!==undefined?<DescriptionComp dataArr={dataArr}/>:<></>}
         {dataArr!==undefined?<CountryComp dataArr={dataArr}/>:<></>}

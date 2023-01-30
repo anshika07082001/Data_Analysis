@@ -10,6 +10,7 @@ const IdComp = (props:idProps) => {
     var [idObj,setIdObj]=useState<any>([])
     var [selArr,setSelArr]=useState<obj[]>([])
 
+    //  function checks for repeated description in a select box
     useEffect(()=>{
         var idObj:any=[]
         props.dataArr.slice(1,200).map((item:any)=>{
@@ -21,6 +22,7 @@ const IdComp = (props:idProps) => {
         setIdObj(idObj)
     },[props.dataArr])
 
+    // function renders the Id data in selectbox
     const selectHandler=(e:React.ChangeEvent<HTMLSelectElement>)=>{
         selArr=[]
         props.dataArr.slice(1,200).map((item:any)=>{
@@ -43,6 +45,7 @@ const IdComp = (props:idProps) => {
         </select> 
         :<></>}
         {selArr.length>0?
+        // renders the selected Id data into tabular format
         <table className='m-auto mt-4 border-2 border-primary p-2 col-8'> 
             <tr className='fs-5'><th className='border border-primary border-2 p-2 bg-primary text-white'>CustomerID</th><th className=' bg-primary text-white border border-primary border-2 p-2'>Country</th><th className='bg-primary text-white border border-primary border-2 p-2'>InvoiceDate</th><th className='bg-primary text-white border border-primary border-2 p-2'>Quantity</th><th className='bg-primary text-white border border-primary border-2 p-2'>UnitPrice</th></tr>
             {selArr.map((item)=>{

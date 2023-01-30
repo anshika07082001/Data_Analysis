@@ -12,6 +12,7 @@ const DescriptionComp = (props:desProps) => {
     var [quantity,setQuantity]=useState(0)
     var [len,setLen]=useState(0)
 
+    // function checks for repeated description in a select box
     useEffect(()=>{
         var DesObj:any=[]
         props.dataArr.slice(1,50).map((item:any)=>{
@@ -23,6 +24,7 @@ const DescriptionComp = (props:desProps) => {
         setDesObj(DesObj)
     },[props.dataArr])
 
+    // function renders the description data in selectbox
     const selectHandler=(e:React.ChangeEvent<HTMLSelectElement>)=>{
         DesArr=[]
         props.dataArr.map((item:any)=>{
@@ -33,7 +35,7 @@ const DescriptionComp = (props:desProps) => {
         setDesArr(DesArr)
         calculateQuant()
     }
-
+    // function calculates the total quantity and no. of times quantity is ordered
     const calculateQuant=()=>{
         setLen(DesArr.length)
         DesArr.map((item)=>{
@@ -41,8 +43,6 @@ const DescriptionComp = (props:desProps) => {
         })
         setQuantity(quantity)
     }
-
-    // console.log(DesArr)
     
   return (
     <div className='mt-4'>
@@ -55,6 +55,7 @@ const DescriptionComp = (props:desProps) => {
             })}
         </select>
         :<></>}
+        {/* renders the total quantity */}
         {quantity!=0?<h5>Total Quantity: {quantity}</h5>:<></>}
         {len!=0?<h5>{len} no. of times item is Ordered</h5>:<></>}
     </div>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+
 type obj = {
     Country:string,CustomerID:string,Description:string,InvoiceDate:string,InvoiceNo:string,Quantity:string,StockCode:string,UnitPrice:string
 }
@@ -9,6 +10,8 @@ type countryProps={
 const CountryComp = (props:countryProps) => {
     var [countryObj,setcountryObj]=useState<any>([])
     var [countryArr,setCountryArr]=useState<obj[]>([])
+
+    // function checks for repeated countries in a select box
     useEffect(()=>{
         var countryObj:any=[]
         props.dataArr.slice(1,50).map((item:any)=>{
@@ -20,6 +23,7 @@ const CountryComp = (props:countryProps) => {
         setcountryObj(countryObj)
     },[props.dataArr])
 
+    // function renders the selected country data
     const selecthandler=(e:React.ChangeEvent<HTMLSelectElement>)=>{
         countryArr=[]
         props.dataArr.map((item:any)=>{
@@ -29,10 +33,12 @@ const CountryComp = (props:countryProps) => {
         })
         setCountryArr(countryArr)
     }
+
   return (
     <div className='mt-3'>
         <h2>Orders in country</h2>
         {props.dataArr!==undefined?
+        // renders the countries into selectbox
         <select className='mt-3 p-2 fs-6 fw-bold bg-primary text-white col-4 border-primary border-3 rounded' onChange={(e)=>selecthandler(e)}>
             <option>Select Country</option>
             {countryObj.map((item:any)=>{
@@ -42,6 +48,7 @@ const CountryComp = (props:countryProps) => {
         :
         <></>}
         {countryArr.length>0?
+        // renders the selected country data into tabular format
         <table className='m-auto mt-4 border-2 border-primary p-2 col-8'>
             <tr className='fs-5'><th className='border border-primary border-2 p-2 bg-primary text-white'>CustomerID</th><th className=' bg-primary text-white border border-primary border-2 p-2'>Description</th><th className='bg-primary text-white border border-primary border-2 p-2'>Quantity</th></tr>
             {countryArr.map((item)=>{
