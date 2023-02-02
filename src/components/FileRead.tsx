@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CountryComp from './CountryComp'
 import DescriptionComp from './DescriptionComp'
 import IdComp from './IdComp'

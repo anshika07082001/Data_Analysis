@@ -56,7 +56,7 @@ const CountryComp = (props:countryProps) => {
             <tr className='fs-5'><th className='border border-primary border-2 p-2 bg-primary text-white'>CustomerID</th><th className=' bg-primary text-white border border-primary border-2 p-2'>Description</th><th className='bg-primary text-white border border-primary border-2 p-2'>Quantity</th></tr>
             {countryArr.map((item)=>{
                 return <tr className='fw-bold'>
-                <td className='border border-primary border-2 p-2'>{item.CustomerID}</td>
+                <td className='border border-primary border-2 p-2'>{parseInt(item.CustomerID)}</td>
                 <td className='border border-primary border-2 p-2'>{item.Description}</td>
                 <td className='border border-primary border-2 p-2'>{item.Quantity}</td>
                 </tr>

@@ -29,7 +29,7 @@ const IdComp = (props:idProps) => {
     const selectHandler=(e:React.ChangeEvent<HTMLSelectElement>)=>{
         selArr=[]
         props.dataArr.map((item:any)=>{
-            if(item.CustomerID==e.currentTarget.value){
+            if(item.CustomerID==Number(e.currentTarget.value)){
                 selArr.push(item)
             }
         })
@@ -43,7 +43,7 @@ const IdComp = (props:idProps) => {
         <select onChange={(e)=>selectHandler(e)} className='mt-3 p-2 fs-6 fw-bold bg-primary text-white col-4 border-primary border-3 rounded'>
             <option>Select</option>
             {idObj.map((item:any)=>{
-                return <option>{item}</option>
+                return <option>{parseInt(item)}</option>
             })}
         </select> 
         :<></>}
@@ -54,7 +54,7 @@ const IdComp = (props:idProps) => {
             {selArr.map((item)=>{
                return (
                <tr className='fw-bold'>
-                <td className='border border-primary border-2 p-2'>{item.CustomerID}</td>
+                <td className='border border-primary border-2 p-2'>{parseInt(item.CustomerID)}</td>
                 <td className='border border-primary border-2 p-2'>{item.Country}</td>
                 <td className='border border-primary border-2 p-2'>{item.InvoiceDate}</td>
                 <td className='border border-primary border-2 p-2'>{item.Quantity}</td>
